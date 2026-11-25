@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dark">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#1b1713">
+  <title>Entrar — Cadastro de Clientes</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/abajur.css">
+  <link rel="stylesheet" href="css/login.css">
+  <script src="js/tema.js"></script>
+</head>
+
+<body>
+
+  <div class="cenario" aria-hidden="true"></div>
+  <canvas id="chuva" aria-hidden="true"></canvas>
+
+  <div class="pagina">
+
+    <section class="palco" aria-label="Ilustração animada">
+      <div class="cena">
+
+        <button type="button" class="abajur abajur--grande" id="abajur" aria-label="Modo claro" aria-pressed="false">
+          <svg class="abajur__svg" viewBox="0 0 220 290" focusable="false" aria-hidden="true">
+            <defs>
+              <radialGradient id="ab-g-cupula" cx="50%" cy="100%" r="95%">
+                <stop offset="0" class="ab-c1" />
+                <stop offset=".55" class="ab-c2" />
+                <stop offset="1" class="ab-c3" />
+              </radialGradient>
+              <radialGradient id="ab-g-halo" cx="50%" cy="50%" r="50%">
+                <stop offset="0" stop-color="#ffc766" stop-opacity=".55" />
+                <stop offset="1" stop-color="#ffc766" stop-opacity="0" />
+              </radialGradient>
+              <linearGradient id="ab-g-haste" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#ffe7a8" />
+                <stop offset="1" stop-color="#d9a043" stop-opacity=".25" />
+              </linearGradient>
+              <linearGradient id="ab-g-base" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#5b667c" />
+                <stop offset="1" stop-color="#363e50" />
+              </linearGradient>
+              <radialGradient id="ab-g-botao" cx="50%" cy="40%" r="60%">
+                <stop offset="0" stop-color="#fffbe6" />
+                <stop offset=".6" stop-color="#ffd980" />
+                <stop offset="1" stop-color="#f0a93c" />
+              </radialGradient>
+            </defs>
+            <ellipse class="ab-halo" cx="110" cy="120" rx="150" ry="120" fill="url(#ab-g-halo)" />
+            <path d="M12 148 C12 84 54 36 110 36 C166 36 208 84 208 148 Z" fill="url(#ab-g-cupula)" />
+            <rect x="8" y="146" width="204" height="13" rx="6.5" fill="#262d3b" />
+            <rect x="105" y="159" width="10" height="92" rx="5" fill="url(#ab-g-haste)" />
+            <path
+              d="M46 264 C46 246 74 238 110 238 C146 238 174 246 174 264 C174 280 146 288 110 288 C74 288 46 280 46 264 Z"
+              fill="url(#ab-g-base)" />
+            <circle cx="110" cy="252" r="18" fill="#ffd980" opacity=".35" />
+            <circle class="ab-botao" cx="110" cy="252" r="10" fill="url(#ab-g-botao)" />
+          </svg>
+        </button>
+
+        <div class="robo" aria-hidden="true">
+          <svg class="robo__svg" viewBox="0 0 600 720" focusable="false">
+
+            <g class="r-poca">
+              <ellipse class="r-poca__base" cx="300" cy="700" rx="205" ry="12" />
+              <ellipse class="r-onda r-onda--1" cx="190" cy="700" rx="44" ry="8" />
+              <ellipse class="r-onda r-onda--2" cx="410" cy="701" rx="44" ry="8" />
+              <ellipse class="r-onda r-onda--3" cx="300" cy="703" rx="38" ry="7" />
+              <ellipse class="r-onda r-onda--4" cx="118" cy="702" rx="34" ry="6" />
+            </g>
+
+            <g class="r-fig">
+              <rect class="r-escuro" x="252" y="606" width="26" height="64" rx="9" />
+              <rect class="r-corpo" x="232" y="666" width="64" height="30" rx="14" />
+              <rect class="r-escuro" x="322" y="606" width="26" height="64" rx="9" />
+              <rect class="r-corpo" x="304" y="666" width="64" height="30" rx="14" />
+
+              <g class="r-respira">
+
+                <g class="r-braco-e">
+                  <rect class="r-corpo" x="185" y="450" width="26" height="88" rx="13" />
+                  <circle class="r-escuro" cx="198" cy="456" r="15" />
+                  <circle class="r-escuro" cx="198" cy="548" r="15" />
+                  <path class="r-fenda" d="M198,552 V562" />
+                </g>
+
+                <g class="r-braco-d">
+                  <rect class="r-corpo" x="389" y="450" width="26" height="88" rx="13" />
+                  <circle class="r-escuro" cx="402" cy="456" r="15" />
+                  <g class="r-mao">
+                    <circle class="r-escuro" cx="402" cy="548" r="15" />
+                    <path class="r-fenda" d="M402,552 V562" />
+                  </g>
+                </g>
+
+                <rect class="r-corpo" x="216" y="420" width="168" height="190" rx="46" />
+                <path class="r-sombra" d="M368,472 V572" />
+                <rect class="r-tela" x="244" y="462" width="112" height="92" rx="18" />
+                <circle class="r-led r-led--1" cx="272" cy="490" r="8" />
+                <circle class="r-led r-led--2" cx="300" cy="490" r="8" />
+                <circle class="r-led r-led--3" cx="328" cy="490" r="8" />
+                <path class="r-grade" d="M268,520 H332 M268,532 H332" />
+                <rect class="r-escuro" x="262" y="598" width="76" height="22" rx="10" />
+
+                <rect class="r-escuro" x="278" y="394" width="44" height="32" rx="8" />
+
+
+                <g class="r-cabeca">
+                  <g class="r-antena">
+                    <rect class="r-escuro" x="296" y="196" width="8" height="60" rx="4" />
+                    <circle class="r-bulbo" cx="300" cy="186" r="15" />
+                  </g>
+                  <rect class="r-corpo" x="186" y="296" width="18" height="56" rx="8" />
+                  <rect class="r-corpo" x="396" y="296" width="18" height="56" rx="8" />
+                  <rect class="r-corpo" x="200" y="250" width="200" height="152" rx="42" />
+                  <path class="r-sombra" d="M384,300 C384,330 380,352 372,372" />
+                  <rect class="r-tela" x="222" y="274" width="156" height="104" rx="28" />
+                  <g class="r-olhar">
+                    <g class="r-olhos">
+                      <rect class="r-olho" x="254" y="300" width="22" height="40" rx="11" />
+                      <rect class="r-olho" x="324" y="300" width="22" height="40" rx="11" />
+                    </g>
+                    <path class="r-boca" d="M284,356 Q300,367 316,356" />
+                  </g>
+                </g>
+              </g>
+            </g>
+          </svg>
+        </div>
+      </div>
+
+      <div class="legenda">
+        <h2 class="legenda__titulo">Acenda o ambiente.</h2>
+        <p class="legenda__texto">Toque no abajur para mudar o clima.</p>
+      </div>
+    </section>
+
+    <main class="painel">
+      <section class="cartao" aria-labelledby="titulo-login">
+        <h1 class="cartao__titulo" id="titulo-login">Bem-vindo de volta</h1>
+        <p class="cartao__sub">Entre para continuar na sua conta.</p>
+
+        <form id="form-login" novalidate>
+          <div class="campo">
+            <label for="email">E-mail</label>
+            <div class="entrada">
+              <i data-feather="mail" class="entrada__icone"></i>
+              <input id="email" name="email" type="email" inputmode="email" autocomplete="email"
+                placeholder="nome@exemplo.com" maxlength="254" aria-describedby="erro-email">
+              <i data-feather="check-circle" class="entrada__estado entrada__estado--ok"></i>
+              <i data-feather="alert-circle" class="entrada__estado entrada__estado--erro"></i>
+            </div>
+            <p class="campo__erro" id="erro-email" aria-live="polite"></p>
+          </div>
+
+          <div class="campo">
+            <label for="senha">Senha</label>
+            <div class="entrada">
+              <i data-feather="lock" class="entrada__icone"></i>
+              <input id="senha" name="senha" type="password" autocomplete="current-password" placeholder="Sua senha"
+                maxlength="128" aria-describedby="erro-senha">
+              <button type="button" class="olho" id="olho" aria-label="Mostrar senha" aria-pressed="false">
+                <i data-feather="eye" class="olho__ver"></i>
+                <i data-feather="eye-off" class="olho__ocultar"></i>
+              </button>
+            </div>
+            <p class="campo__erro" id="erro-senha" aria-live="polite"></p>
+          </div>
+
+          <button type="submit" class="botao" id="entrar">
+            <span class="botao__texto">Entrar</span>
+            <i data-feather="arrow-right" class="botao__seta"></i>
+          </button>
+
+          <p class="status" id="status" role="status" aria-live="polite"></p>
+        </form>
+
+        <p class="rodape-cartao">Novo por aqui? <a class="link link--forte" href="cadastro.html">Criar uma conta</a></p>
+      </section>
+    </main>
+  </div>
+
+  <script src="js/feather.js"></script>
+  <script src="js/chuva.js"></script>
+  <script src="js/abajur.js"></script>
+  <script src="js/robo.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/campos.js"></script>
+  <script src="js/login.js"></script>
+</body>
+
+</html>

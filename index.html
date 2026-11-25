@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cadastro de Clientes</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/abajur.css">
+
+  <script src="js/tema.js"></script>
+
+  <script>
+    try { if (!sessionStorage.getItem('sessao-ativa')) location.replace('login.html'); } catch (e) {}
+  </script>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script>
+    tailwind.config = {
+      darkMode: ['selector', '[data-theme="dark"]'],
+      theme: { extend: { fontFamily: { sans: ['Manrope', 'system-ui', 'sans-serif'] } } }
+    };
+  </script>
+</head>
+<body class="min-h-screen bg-slate-100 font-sans text-slate-900 dark:bg-slate-950 dark:text-slate-100">
+
+  <header class="bg-indigo-800 text-white dark:bg-indigo-950">
+    <div class="mx-auto flex max-w-6xl flex-col gap-5 px-4 py-6 sm:px-6 sm:py-8 md:flex-row md:items-center md:justify-between">
+      <div class="flex items-center gap-4">
+
+        <button type="button" class="abajur abajur--mini shrink-0" id="abajur" aria-label="Modo claro" aria-pressed="false">
+          <svg class="abajur__svg" viewBox="0 0 220 290" focusable="false" aria-hidden="true">
+            <defs>
+              <radialGradient id="ab-g-cupula" cx="50%" cy="100%" r="95%">
+                <stop offset="0" class="ab-c1"/>
+                <stop offset=".55" class="ab-c2"/>
+                <stop offset="1" class="ab-c3"/>
+              </radialGradient>
+              <linearGradient id="ab-g-haste" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#ffe7a8"/>
+                <stop offset="1" stop-color="#d9a043" stop-opacity=".25"/>
+              </linearGradient>
+              <linearGradient id="ab-g-base" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#5b667c"/>
+                <stop offset="1" stop-color="#363e50"/>
+              </linearGradient>
+              <radialGradient id="ab-g-botao" cx="50%" cy="40%" r="60%">
+                <stop offset="0" stop-color="#fffbe6"/>
+                <stop offset=".6" stop-color="#ffd980"/>
+                <stop offset="1" stop-color="#f0a93c"/>
+              </radialGradient>
+            </defs>
+            <path d="M12 148 C12 84 54 36 110 36 C166 36 208 84 208 148 Z" fill="url(#ab-g-cupula)"/>
+            <rect x="8" y="146" width="204" height="13" rx="6.5" fill="#262d3b"/>
+            <rect x="105" y="159" width="10" height="92" rx="5" fill="url(#ab-g-haste)"/>
+            <path d="M46 264 C46 246 74 238 110 238 C146 238 174 246 174 264 C174 280 146 288 110 288 C74 288 46 280 46 264 Z" fill="url(#ab-g-base)"/>
+            <circle cx="110" cy="252" r="18" fill="#ffd980" opacity=".35"/>
+            <circle class="ab-botao" cx="110" cy="252" r="10" fill="url(#ab-g-botao)"/>
+          </svg>
+        </button>
+
+        <div>
+          <h1 class="text-2xl font-extrabold sm:text-3xl">Cadastro de clientes</h1>
+          <p class="mt-1 text-sm text-indigo-200 sm:text-base">Cadastre, priorize e acompanhe o atendimento de cada cliente.</p>
+        </div>
+      </div>
+      <div class="flex flex-col gap-3 md:w-80">
+      <div class="flex justify-end">
+        <button type="button" id="btn-sair"
+          class="rounded-lg border border-red-600 bg-red-600 px-4 py-2 text-sm font-bold text-white hover:border-red-700 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-300">
+          Sair
+        </button>
+      </div>
+      <div class="grid grid-cols-2 gap-3">
+        <div class="rounded-xl bg-white/10 px-4 py-3">
+          <p class="text-sm text-indigo-200">Pendentes</p>
+          <p id="contador-pendentes" class="text-3xl font-extrabold">0</p>
+        </div>
+        <div class="rounded-xl bg-white/10 px-4 py-3">
+          <p class="text-sm text-indigo-200">Concluídos</p>
+          <p id="contador-concluidos" class="text-3xl font-extrabold">0</p>
+        </div>
+      </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="mx-auto max-w-6xl space-y-6 px-4 py-6 sm:px-6 sm:py-8">
+
+    <section class="rounded-2xl bg-white p-4 shadow-sm dark:bg-slate-900 dark:ring-1 dark:ring-white/10 sm:p-6">
+      <form id="form-cliente" novalidate class="grid gap-4 sm:grid-cols-2 lg:grid-cols-[1fr_14rem_auto] lg:items-end">
+        <div class="sm:col-span-2 lg:col-span-1">
+          <label for="nome-cliente" class="mb-1 block text-sm font-semibold">Nome do cliente</label>
+          <input id="nome-cliente" type="text" maxlength="60" placeholder="Ex.: Maria Souza"
+            class="w-full rounded-lg border border-slate-300 px-3 py-2.5 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-100 dark:placeholder-slate-400">
+        </div>
+        <div>
+          <label for="prioridade" class="mb-1 block text-sm font-semibold">Prioridade</label>
+          <select id="prioridade"
+            class="w-full rounded-lg border border-slate-300 bg-white px-3 py-2.5 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-100">
+            <option value="alta">Alta</option>
+            <option value="media" selected>Média</option>
+            <option value="baixa">Baixa</option>
+          </select>
+        </div>
+        <button type="submit"
+          class="rounded-lg bg-indigo-700 px-5 py-2.5 font-bold text-white hover:bg-indigo-800 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:bg-indigo-600 dark:hover:bg-indigo-500 dark:focus:ring-offset-slate-900 sm:col-span-1 lg:col-span-1">
+          Cadastrar cliente
+        </button>
+      </form>
+
+      <p id="mensagem-erro" role="alert" class="mt-3 hidden text-sm font-semibold text-red-700 dark:text-red-300"></p>
+
+      <ul class="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2 border-t border-slate-200 pt-4 text-sm dark:border-slate-700">
+        <li class="font-semibold text-slate-600 dark:text-slate-300">Legenda:</li>
+        <li class="flex items-center gap-2"><span class="h-3 w-3 rounded-full bg-red-500"></span>Alta</li>
+        <li class="flex items-center gap-2"><span class="h-3 w-3 rounded-full bg-yellow-400"></span>Média</li>
+        <li class="flex items-center gap-2"><span class="h-3 w-3 rounded-full bg-green-500"></span>Baixa</li>
+      </ul>
+    </section>
+
+    <div class="grid gap-6 lg:grid-cols-2">
+      <section class="rounded-2xl bg-white p-4 shadow-sm dark:bg-slate-900 dark:ring-1 dark:ring-white/10 sm:p-6">
+        <h2 class="mb-4 text-lg font-bold sm:text-xl">Aguardando atendimento</h2>
+        <p id="vazio-pendentes" class="text-sm text-slate-500 dark:text-slate-400">Nenhum cliente pendente. Cadastre o primeiro acima.</p>
+        <ul id="lista-pendentes" class="space-y-3"></ul>
+      </section>
+
+      <section class="rounded-2xl bg-white p-4 shadow-sm dark:bg-slate-900 dark:ring-1 dark:ring-white/10 sm:p-6">
+        <h2 class="mb-4 text-lg font-bold sm:text-xl">Histórico de concluídos</h2>
+        <p id="vazio-concluidos" class="text-sm text-slate-500 dark:text-slate-400">Os atendimentos concluídos aparecem aqui com data e horário.</p>
+        <ul id="lista-concluidos" class="space-y-3"></ul>
+      </section>
+    </div>
+  </main>
+
+  <script src="js/abajur.js"></script>
+  <script src="js/script.js"></script>
+  <script>
+    document.getElementById('btn-sair').addEventListener('click', function () {
+      try { sessionStorage.removeItem('sessao-ativa'); } catch (e) {}
+      location.href = 'login.html';
+    });
+  </script>
+</body>
+</html>
